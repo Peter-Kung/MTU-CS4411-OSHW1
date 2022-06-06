@@ -3,10 +3,11 @@ Finding the Maximum Fast!
 Well, it may not be that fast. But, this problem is a very interesting exercise.
 Everyone knows how to find the maximum of a set of integers. You might do the following:
 
-max = x[0];
-for (i = 1; i < n; i++)
-     if (x[i] > max)
-          max = x[i];
+     max = x[0];
+     for (i = 1; i < n; i++)
+          if (x[i] > max)
+               max = x[i];
+
 This is based on the fact that you have only one CPU and use n - 1 comparisons to find the maximum. Can we do better if more CPUs are available? The answer is certainly a "yes". Here is how.
 Let us use a thread to simulate a CPU. Suppose we have n distinct integers x0, x1, ..., xn-1. We first initialize a working array of n entries, say w, to all 1s. This can be done with n threads, each of which writes a 1 into its corresponding entry. More precisely, thread Ti writes 1 into wi. Since each thread (or CPU if you prefer) takes one step to complete its task and since all threads run concurrently, the initialization step only needs one step. After this initialization step, two more steps are required.
 
@@ -33,16 +34,19 @@ The activity performed by thread Tij in Step 2.
 The values of array w after Step 2.
 The maximum and its location.
 Suppose the command line is
-prog1  4  3 1 7 4
+
+     prog1  4  3 1 7 4
+         
 Then, you program's output should look like the following:
-Number of input values = 4
-Input values         x = 3 1 7 4
-After initialization w = 1 1 1 1
-     ..........
-Thread T(1,3) compares x[1] = 1 and x[3] = 4, and writes 0 into w[1]
-     ..........
-After Step 2         w = 0 0 1 0
-Maximum                = 7
-Location               = 2
+
+     Number of input values = 4
+     Input values         x = 3 1 7 4
+     After initialization w = 1 1 1 1
+          ..........
+     Thread T(1,3) compares x[1] = 1 and x[3] = 4, and writes 0 into w[1]
+          ..........
+     After Step 2         w = 0 0 1 0
+     Maximum                = 7
+     Location               = 2
 
 [OriginURL](https://pages.mtu.edu/~shene/FORUM/Taiwan-Forum/ComputerScience/003-OS/PROG/PG1/prog1.html)
