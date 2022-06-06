@@ -7,3 +7,5 @@ all: main
 	$(TARGET) 4 3 1 7 4
 main:
 	$(CC) $(SOURCE) $(CFLAG) $(TARGET)
+clean:
+	rm $(TARGET)
